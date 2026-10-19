@@ -1,0 +1,624 @@
+
+.my-orders-page {
+  min-height: 100vh;
+  padding: 36px 24px 64px;
+  background: #f5f8f6;
+  color: #192b20;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.my-orders-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.my-orders-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e0e9e2;
+}
+
+.orders-eyebrow {
+  margin: 0 0 8px;
+  color: #167647;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+.my-orders-header h1 {
+  margin: 0;
+  color: #15291c;
+  font-size: clamp(30px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -1.3px;
+}
+
+.my-orders-header p:not(.orders-eyebrow) {
+  margin: 9px 0 0;
+  color: #718078;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.orders-secondary-button,
+.orders-primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.orders-secondary-button {
+  flex-shrink: 0;
+  border: 1px solid #d7e3da;
+  background: #fff;
+  color: #294534;
+}
+
+.orders-secondary-button:hover {
+  border-color: #9bc9aa;
+  background: #f2f8f4;
+}
+
+.orders-primary-button {
+  background: #167647;
+  color: #fff;
+}
+
+.orders-primary-button:hover {
+  background: #105f38;
+}
+
+.orders-empty {
+  display: flex;
+  min-height: 350px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 20px;
+  border: 1px solid #e0e9e2;
+  border-radius: 16px;
+  background: #fff;
+  text-align: center;
+}
+
+.orders-empty-icon {
+  display: grid;
+  width: 70px;
+  height: 70px;
+  place-items: center;
+  border-radius: 20px;
+  background: #e9f5ed;
+  font-size: 34px;
+}
+
+.orders-empty h2 {
+  margin: 20px 0 8px;
+  color: #1b3524;
+  font-size: 23px;
+}
+
+.orders-empty p {
+  margin: 0 0 22px;
+  color: #718078;
+  font-size: 14px;
+}
+
+.orders-status {
+  padding: 60px 20px;
+  color: #68796d;
+  text-align: center;
+}
+
+.orders-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 13px 16px;
+  border: 1px solid #b7e4c7;
+  border-radius: 10px;
+  background: #effaf2;
+  color: #166534;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.orders-alert-error {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.orders-alert button {
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 21px;
+}
+
+.orders-list {
+  display: grid;
+  gap: 22px;
+}
+
+.order-card {
+  overflow: hidden;
+  border: 1px solid #e1e9e3;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 5px 20px rgb(24 54 35 / 5%);
+  overflow-wrap: anywhere;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.order-card:hover {
+  border-color: #d1e2d5;
+  box-shadow: 0 8px 26px rgb(24 54 35 / 8%);
+}
+
+.order-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 19px 24px;
+  border-bottom: 1px solid #eaf0eb;
+  background: #fbfdfb;
+}
+
+.order-id-block {
+  min-width: 0;
+}
+
+.order-label {
+  margin: 0 0 5px;
+  color: #7b8980;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+}
+
+.order-id-block > strong {
+  display: block;
+  color: #203b2a;
+  font-size: 13px;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.order-placed-date {
+  margin: 6px 0 0;
+  color: #859187;
+  font-size: 11px;
+}
+
+.order-status {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 750;
+  text-align: center;
+}
+
+.order-status-placed {
+  background: #fff4e6;
+  color: #a65b0b;
+}
+
+.order-status-accepted {
+  background: #e9f3ff;
+  color: #205cb0;
+}
+
+.order-status-ready_for_pickup {
+  background: #e8f1ff;
+  color: #1d4ed8;
+}
+
+.order-status-collected {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.order-status-rejected,
+.order-status-cancelled {
+  background: #feecec;
+  color: #b91c1c;
+}
+
+.order-card-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  align-items: start;
+}
+
+.order-products-panel {
+  min-width: 0;
+  padding: 23px;
+  border-right: 1px solid #eaf0eb;
+}
+
+.order-details-panel {
+  min-width: 0;
+  padding: 23px;
+  background: #fff;
+}
+
+.order-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 17px;
+}
+
+.order-panel-heading h2 {
+  margin: 0;
+  color: #203629;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.order-panel-heading > span {
+  color: #78877d;
+  font-size: 11px;
+}
+
+.order-products {
+  display: grid;
+  gap: 0;
+}
+
+.order-product {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding: 15px 0;
+  border-bottom: 1px solid #edf2ee;
+}
+
+.order-product:first-child {
+  padding-top: 2px;
+}
+
+.order-product:last-child {
+  border-bottom: 0;
+}
+
+.order-product-image {
+  display: flex;
+  width: 92px;
+  height: 92px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #e8eee9;
+  border-radius: 11px;
+  background: #f2f7f3;
+  color: #718c79;
+  font-size: 35px;
+}
+
+.order-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.order-product-info {
+  min-width: 0;
+}
+
+.order-product-title {
+  margin: 0 0 7px;
+  color: #20372a;
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+.order-product-quantity,
+.order-product-unit-price {
+  margin: 4px 0 0;
+  color: #7a887e;
+  font-size: 12px;
+}
+
+.order-product-total {
+  grid-column: 2;
+  color: #167647;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.order-note {
+  margin-top: 15px;
+  padding: 13px;
+  border: 1px solid #e2eee5;
+  border-radius: 9px;
+  background: #f7fbf8;
+  color: #4e6655;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.order-note p {
+  margin: 5px 0 0;
+  white-space: pre-wrap;
+}
+
+.order-details-panel > .order-panel-heading {
+  margin-bottom: 14px;
+}
+
+.order-detail-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid #f0f3f0;
+}
+
+.order-detail-row > span {
+  flex-shrink: 0;
+  color: #78867c;
+  font-size: 12px;
+}
+
+.order-detail-row > strong {
+  color: #2b4132;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.payment-status {
+  padding: 4px 7px;
+  border-radius: 6px;
+  background: #fff4e5;
+  color: #a35b0b !important;
+  font-size: 10px !important;
+}
+
+.payment-paid {
+  background: #e5f6e9;
+  color: #166534 !important;
+}
+
+.pickup-schedule-card {
+  margin-top: 17px;
+  padding: 15px;
+  border: 1px solid #cfe6d8;
+  border-radius: 11px;
+  background: #f5fbf7;
+}
+
+.pickup-schedule-card h3 {
+  margin: 0 0 12px;
+  color: #166534;
+  font-size: 14px;
+}
+
+.schedule-detail {
+  display: grid;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.schedule-detail span {
+  color: #718078;
+  font-size: 11px;
+}
+
+.schedule-detail strong {
+  color: #294534;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.pickup-schedule-actions {
+  display: grid;
+  gap: 9px;
+  margin-top: 15px;
+}
+
+.orders-confirm-pickup-button,
+.orders-reschedule-button {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.orders-confirm-pickup-button {
+  border: 1px solid #167647;
+  background: #167647;
+  color: #fff;
+}
+
+.orders-confirm-pickup-button:hover:not(:disabled) {
+  background: #105f38;
+}
+
+.orders-reschedule-button {
+  border: 1px solid #d4e0d7;
+  background: #fff;
+  color: #31543e;
+}
+
+.orders-reschedule-button:hover:not(:disabled) {
+  background: #edf6ef;
+}
+
+.orders-confirm-pickup-button:disabled,
+.orders-reschedule-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.pickup-waiting-message {
+  margin: 12px 0 0;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.order-card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-top: 19px;
+  padding-top: 18px;
+  border-top: 1px solid #e5ede7;
+}
+
+.order-card-footer > div {
+  display: grid;
+  gap: 5px;
+}
+
+.order-card-footer > div span {
+  color: #78867c;
+  font-size: 12px;
+}
+
+.order-card-footer > div strong {
+  color: #147945;
+  font-size: 25px;
+  font-weight: 850;
+  letter-spacing: -0.5px;
+}
+
+.orders-cancel-button {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #f1caca;
+  border-radius: 8px;
+  background: #fff;
+  color: #b91c1c;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.orders-cancel-button:hover:not(:disabled) {
+  background: #fff2f2;
+}
+
+.orders-cancel-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+@media (max-width: 850px) {
+  .my-orders-page {
+    padding: 28px 18px 50px;
+  }
+
+  .order-card-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .order-products-panel {
+    border-right: 0;
+    border-bottom: 1px solid #eaf0eb;
+  }
+
+  .order-details-panel {
+    background: #fbfdfb;
+  }
+
+  .order-card-footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .orders-cancel-button {
+    width: auto;
+  }
+}
+
+@media (max-width: 550px) {
+  .my-orders-page {
+    padding: 22px 12px 40px;
+  }
+
+  .my-orders-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .order-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 17px;
+  }
+
+  .order-products-panel,
+  .order-details-panel {
+    padding: 17px;
+  }
+
+  .order-product {
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 11px;
+  }
+
+  .order-product-image {
+    width: 76px;
+    height: 76px;
+  }
+
+  .order-product-title {
+    font-size: 13px;
+  }
+
+  .order-card-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .orders-cancel-button {
+    width: 100%;
+  }
+
+  .order-detail-row {
+    gap: 10px;
+  }
+
+  .order-detail-row > span {
+    max-width: 42%;
+  }
+}

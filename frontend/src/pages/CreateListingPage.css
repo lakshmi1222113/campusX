@@ -1,0 +1,349 @@
+
+/* CampusX — Compact Create Listing Form */
+
+.create-listing-page {
+  min-height: 100vh;
+  padding-bottom: 36px;
+  background: #f8faf8;
+  color: #1b2921;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.create-listing-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 12px 24px;
+  background: #fff;
+  border-bottom: 1px solid #e3eae4;
+}
+
+.create-listing-header-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.create-listing-brand,
+.create-listing-back {
+  text-decoration: none;
+}
+
+.create-listing-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #1b2921;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.create-listing-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #267b59;
+  color: #fff;
+}
+
+.create-listing-back {
+  color: #52665a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.create-listing-back:hover {
+  color: #267b59;
+}
+
+.create-listing-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 28px 20px;
+}
+
+/* Page heading */
+
+.create-listing-eyebrow {
+  margin: 0 0 6px;
+  color: #267b59;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.create-listing-title {
+  margin: 0 0 6px;
+  font-size: clamp(27px, 3vw, 34px);
+  font-weight: 750;
+  letter-spacing: -0.8px;
+}
+
+.create-listing-subtitle {
+  margin: 0;
+  color: #718078;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Hide preview panel */
+
+.create-listing-layout {
+  display: block;
+  margin-top: 22px;
+}
+
+
+
+/* Form panel */
+
+.create-listing-panel {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 24px;
+  border: 1px solid #e2e9e3;
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgb(25 55 35 / 3%);
+}
+
+.create-listing-panel-title {
+  margin: 0 0 5px;
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.create-listing-muted {
+  margin: 0;
+  color: #78857d;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.create-listing-form-heading {
+  padding-bottom: 15px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #edf1ed;
+}
+
+/* Form fields */
+
+.create-listing-field {
+  min-width: 0;
+  margin-bottom: 15px;
+}
+
+.create-listing-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #304238;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.create-listing-required {
+  color: #dc5353;
+}
+
+.create-listing-input,
+.create-listing-textarea,
+.create-listing-select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #dce5dd;
+  border-radius: 8px;
+  background: #fff;
+  color: #1d2b23;
+  font-family: inherit;
+  font-size: 13px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.create-listing-input::placeholder,
+.create-listing-textarea::placeholder {
+  color: #9aa79e;
+}
+
+.create-listing-input:focus,
+.create-listing-textarea:focus,
+.create-listing-select:focus {
+  border-color: #398967;
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(57 137 103 / 10%);
+}
+
+.create-listing-textarea {
+  min-height: 95px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.create-listing-hint {
+  margin: 5px 0 0;
+  color: #87948b;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.create-listing-two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* Submit and cancel */
+
+.create-listing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid #edf1ed;
+}
+
+.create-listing-submit {
+  flex: 1 1 180px;
+  padding: 13px 16px;
+  border: 1px solid #267b59;
+  border-radius: 8px;
+  background: #267b59;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+
+.create-listing-submit:hover:not(:disabled) {
+  background: #1f6549;
+}
+
+.create-listing-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.create-listing-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 17px;
+  border: 1px solid #dce5dd;
+  border-radius: 8px;
+  background: #fff;
+  color: #52665a;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.create-listing-cancel:hover {
+  background: #f5f8f5;
+}
+
+/* Error and login prompts */
+
+.create-listing-error {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border: 1px solid #f2caca;
+  border-radius: 9px;
+  background: #fff4f4;
+  color: #b83232;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.create-listing-login-prompt {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 12px 0 18px;
+  padding: 15px;
+  border: 1px solid #d3e8d9;
+  border-radius: 10px;
+  background: #eff8f0;
+  text-align: center;
+}
+
+.create-listing-login-prompt p {
+  margin: 0 0 10px;
+  color: #286746;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.create-listing-login-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 17px;
+  border-radius: 8px;
+  background: #267b59;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.create-listing-login-button:hover {
+  background: #1f6549;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .create-listing-header {
+    padding: 11px 14px;
+  }
+
+  .create-listing-brand {
+    font-size: 18px;
+  }
+
+  .create-listing-back {
+    font-size: 12px;
+  }
+
+  .create-listing-container {
+    padding: 22px 13px;
+  }
+
+  .create-listing-title {
+    font-size: 28px;
+  }
+
+  .create-listing-layout {
+    margin-top: 18px;
+  }
+
+  .create-listing-panel {
+    padding: 17px;
+  }
+
+  .create-listing-two-columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .create-listing-actions {
+    flex-direction: column;
+  }
+
+  .create-listing-submit,
+  .create-listing-cancel {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

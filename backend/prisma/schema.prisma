@@ -1,0 +1,252 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  STUDENT
+  ADMIN
+}
+
+enum ListingStatus {
+  AVAILABLE
+  RESERVED
+  EXCHANGED
+  REMOVED
+}
+
+enum ItemCondition {
+  NEW
+  LIKE_NEW
+  GOOD
+  FAIR
+}
+
+enum OfferStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  CANCELLED
+}
+
+enum OrderStatus {
+  PLACED
+  ACCEPTED
+  READY_FOR_PICKUP
+  COLLECTED
+  REJECTED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH_ON_COLLECTION
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+}
+
+enum PickupScheduleStatus {
+  PROPOSED
+  CONFIRMED
+  RESCHEDULE_REQUESTED
+}
+
+enum NotificationType {
+  WANTED_ITEM_MATCH
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         UserRole @default(STUDENT)
+  department   String?
+  year         Int?
+  college      String?
+  phoneNumber  String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  listings       Listing[]
+  wantedItems    WantedItem[]
+  sentOffers     ExchangeOffer[] @relation("OfferSender")
+  receivedOffers ExchangeOffer[] @relation("OfferReceiver")
+
+  cartItems     CartItem[]
+  wishlistItems WishlistItem[]
+  buyerOrders   Order[] @relation("OrderBuyer")
+  sellerOrders  Order[] @relation("OrderSeller")
+
+  notifications Notification[]
+
+  @@index([phoneNumber])
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+
+  listings Listing[]
+}
+
+model Listing {
+  id          String        @id @default(cuid())
+  title       String
+  description String
+  price       Decimal       @db.Decimal(10, 2)
+  condition   ItemCondition
+  imageUrl    String?
+  status      ListingStatus @default(AVAILABLE)
+  sellerId    String
+  categoryId  String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  seller   User     @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id])
+  offers   ExchangeOffer[]
+
+  cartItems     CartItem[]
+  wishlistItems WishlistItem[]
+  orderItems    OrderItem[]
+
+  notifications Notification[]
+
+  @@index([sellerId])
+  @@index([categoryId, status])
+}
+
+model WantedItem {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  maxPrice    Decimal? @db.Decimal(10, 2)
+  userId      String
+  createdAt   DateTime @default(now())
+
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  notifications Notification[]
+
+  @@index([userId])
+}
+
+model ExchangeOffer {
+  id          String      @id @default(cuid())
+  message     String?
+  status      OfferStatus @default(PENDING)
+  listingId   String
+  senderId    String
+  receiverId  String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  listing  Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  sender   User    @relation("OfferSender", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver User    @relation("OfferReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  @@index([listingId, status])
+  @@index([senderId])
+  @@index([receiverId])
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  userId    String
+  listingId String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, listingId])
+  @@index([userId])
+}
+
+model WishlistItem {
+  id        String   @id @default(cuid())
+  userId    String
+  listingId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, listingId])
+  @@index([userId])
+}
+
+model Order {
+  id                   String               @id @default(cuid())
+  buyerId              String
+  sellerId             String
+  status               OrderStatus          @default(PLACED)
+  paymentMethod        PaymentMethod        @default(CASH_ON_COLLECTION)
+  paymentStatus        PaymentStatus        @default(PENDING)
+  totalAmount          Decimal              @db.Decimal(10, 2)
+  pickupLocation       String?
+  buyerNote            String?
+  acceptedAt           DateTime?
+  pickupScheduledAt    DateTime?
+  pickupScheduleStatus PickupScheduleStatus?
+  pickupConfirmedAt    DateTime?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  collectedAt          DateTime?
+
+  buyer  User        @relation("OrderBuyer", fields: [buyerId], references: [id], onDelete: Restrict)
+  seller User        @relation("OrderSeller", fields: [sellerId], references: [id], onDelete: Restrict)
+  items  OrderItem[]
+
+  @@index([buyerId, status])
+  @@index([sellerId, status])
+  @@index([createdAt])
+  @@index([pickupScheduledAt])
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  listingId String
+  title     String
+  unitPrice Decimal  @db.Decimal(10, 2)
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Restrict)
+
+  @@index([orderId])
+  @@index([listingId])
+}
+
+model Notification {
+  id           String           @id @default(cuid())
+  userId       String
+  listingId    String?
+  wantedItemId String?
+  type         NotificationType @default(WANTED_ITEM_MATCH)
+  title        String
+  message      String
+  isRead       Boolean          @default(false)
+  createdAt    DateTime         @default(now())
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing    Listing?    @relation(fields: [listingId], references: [id], onDelete: SetNull)
+  wantedItem WantedItem? @relation(fields: [wantedItemId], references: [id], onDelete: SetNull)
+
+  @@unique([userId, listingId, wantedItemId])
+  @@index([userId, isRead, createdAt])
+  @@index([listingId])
+  @@index([wantedItemId])
+}
